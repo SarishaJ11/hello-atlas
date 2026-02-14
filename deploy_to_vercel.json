@@ -1,0 +1,48 @@
+{
+  "workflow_name": "ATLAS Demo — Deploy to Vercel",
+  "description": "Full end-to-end deployment: push code to GitHub, create Vercel project, deploy, and verify the live URL. Run this from inside the project folder. Requires: gh CLI authenticated, Chrome closed, ATLAS_BROWSER_PROFILE set.",
+  "steps": [
+    {
+      "id": 1,
+      "name": "Initialize Git repo",
+      "type": "run_command",
+      "command": "git init && git add -A && git commit -m 'hello-atlas: shipped by ATLAS' --allow-empty",
+      "shell": true,
+      "goal": "Initialize a git repo in the current project folder",
+      "timeout": 30
+    },
+    {
+      "id": 2,
+      "name": "Push to GitHub",
+      "type": "run_command",
+      "command": "gh repo create hello-atlas --public --source=. --push 2>/dev/null || (git remote set-url origin $(gh repo view --json url -q .url) 2>/dev/null && git push -u origin main --force)",
+      "shell": true,
+      "goal": "Create a GitHub repo and push the code (or force-push if it already exists)",
+      "timeout": 60
+    },
+    {
+      "id": 3,
+      "name": "Deploy on Vercel",
+      "type": "llm_navigate",
+      "goal": "Go to https://vercel.com/new. You should already be logged in. Import the 'hello-atlas' repository from your account. On the project configuration page: keep the project name as 'hello-atlas', verify the framework is detected as Next.js, leave all other settings as default. Click the 'Deploy' button. Then WAIT on the deployment page — watch the build logs until you see a success message like 'Congratulations' or a production URL. Do NOT click away from the deployment page while the build is running. Once the deployment succeeds, look for the production URL (it will look like hello-atlas-xxxxx.vercel.app or hello-atlas.vercel.app). Stop when you can see the deployment succeeded and the production URL is visible.",
+      "url": "https://vercel.com/new",
+      "max_actions": 40,
+      "timeout": 300
+    },
+    {
+      "id": 4,
+      "name": "Verify live site",
+      "type": "llm_navigate",
+      "goal": "Go to the Vercel dashboard at https://vercel.com/dashboard. Find the 'hello-atlas' project and click on it. On the project page, find the production deployment URL (it will be shown as a 'Visit' button or a domain link like 'hello-atlas-XXXX.vercel.app' or similar). Click on it to open the live site. Confirm the page renders and you can see the text 'ATLAS shipped this'. If the page loads successfully with content visible, stop. If it shows a 404 or error, go back to the Vercel dashboard, find the correct URL, and try that instead.",
+      "url": "https://vercel.com/dashboard",
+      "max_actions": 15,
+      "timeout": 90
+    },
+    {
+      "id": 5,
+      "name": "Screenshot proof",
+      "type": "screenshot",
+      "goal": "Capture a screenshot of the live deployed site as proof"
+    }
+  ]
+}
