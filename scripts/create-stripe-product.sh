@@ -11,12 +11,17 @@ if [ -z "$STRIPE_SECRET_KEY" ]; then
   exit 1
 fi
 
+if ! command -v jq >/dev/null 2>&1; then
+  echo "Error: jq is required. Install with: brew install jq (macOS) or apt install jq (Linux)" >&2
+  exit 1
+fi
+
 PRODUCT=$(curl -s -X POST https://api.stripe.com/v1/products \
   -u "$STRIPE_SECRET_KEY:" \
   -d "name=Atlas Pro" \
   -d "description=Atlas Pro - Monthly subscription")
 
-PROD_ID=$(echo "$PRODUCT" | grep -o '"id": "prod_[^"]*"' | head -1 | cut -d'"' -f4)
+PROD_ID=$(echo "$PRODUCT" | jq -r '.id // empty')
 if [ -z "$PROD_ID" ]; then
   echo "Error: Stripe product creation failed. Check STRIPE_SECRET_KEY. Response: $PRODUCT" >&2
   exit 1
@@ -28,7 +33,7 @@ PRICE=$(curl -s -X POST https://api.stripe.com/v1/prices \
   -d "currency=usd" \
   -d "recurring[interval]=month")
 
-PRICE_ID=$(echo "$PRICE" | grep -o '"id": "price_[^"]*"' | head -1 | cut -d'"' -f4)
+PRICE_ID=$(echo "$PRICE" | jq -r '.id // empty')
 if [ -z "$PRICE_ID" ]; then
   echo "Error: Stripe price creation failed. Response: $PRICE" >&2
   exit 1

@@ -7,12 +7,18 @@ set +e; source .env 2>/dev/null; set -e
 : "${VERCEL_TOKEN:?VERCEL_TOKEN required - get from vercel.com/account/tokens}"
 : "${STRIPE_SECRET_KEY:?STRIPE_SECRET_KEY required}"
 : "${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:?NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY required}"
-[ -f .atlas_demo_price_id ] || { echo ".atlas_demo_price_id not found - run create-stripe-product first"; exit 1; }
-
-PRICE_ID=$(cat .atlas_demo_price_id)
+# STRIPE_PRICE_ID: from env, or from .atlas_demo_price_id (run create-stripe-product.sh to generate)
+if [ -n "$STRIPE_PRICE_ID" ]; then
+  PRICE_ID="$STRIPE_PRICE_ID"
+elif [ -f .atlas_demo_price_id ]; then
+  PRICE_ID=$(cat .atlas_demo_price_id)
+else
+  echo ".atlas_demo_price_id not found and STRIPE_PRICE_ID not set - run create-stripe-product.sh or set STRIPE_PRICE_ID in .env" >&2
+  exit 1
+fi
 PROJECT="hello-atlas"
 RESP_FILE=$(mktemp)
-trap "rm -f $RESP_FILE" EXIT
+trap 'rm -f "$RESP_FILE"' EXIT
 
 # type "sensitive" accepts raw values; "secret" requires pre-created secret IDs
 add_var() {

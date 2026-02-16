@@ -6,7 +6,7 @@
       "id": 1,
       "name": "Initialize Git and push to GitHub",
       "type": "run_command",
-      "command": "git init && git add -A && git commit -m 'hello-atlas: shipped by ATLAS' --allow-empty && (gh repo create hello-atlas --public --source=. --push 2>/dev/null || (url=$(gh repo view hello-atlas --json url -q .url) && (git remote add origin \"$url\" 2>/dev/null || git remote set-url origin \"$url\") && git push -u origin main --force))",
+      "command": "git init && git add -A && git commit -m 'hello-atlas: shipped by ATLAS' --allow-empty && (gh repo create hello-atlas --private --source=. --push 2>/dev/null || (url=$(gh repo view hello-atlas --json url -q .url) && (git remote add origin \"$url\" 2>/dev/null || git remote set-url origin \"$url\") && (git push -u origin main || ([ "$ALLOW_FORCE_PUSH" = true ] && git push -u origin main --force)))",
       "shell": true,
       "goal": "Initialize git repo and push to GitHub",
       "timeout": 90
@@ -42,7 +42,7 @@
       "id": 5,
       "name": "Trigger redeploy with new env vars",
       "type": "run_command",
-      "command": "git commit -m 'Trigger redeploy for Stripe env' --allow-empty && (git push || git push --force-with-lease origin main)",
+      "command": "git commit -m 'Trigger redeploy for Stripe env' --allow-empty && (git push origin main || ([ \"$ALLOW_FORCE_PUSH\" = true ] && git push origin main --force-with-lease))",
       "shell": true,
       "goal": "Empty commit triggers Vercel to redeploy with new environment variables",
       "timeout": 120
@@ -60,7 +60,7 @@
       "id": 7,
       "name": "Verify live site and checkout",
       "type": "llm_navigate",
-      "continue_on_failure": true,
+      "continue_on_failure": false,
       "goal": "You will start on the live site. Confirm the page renders with 'ATLAS shipped this' and a 'Buy Atlas Pro' button. Click the 'Buy Atlas Pro' button. You should be redirected to Stripe Checkout. If you see the Stripe payment form, stop. The checkout flow works.",
       "url": "https://vercel.com/dashboard",
       "max_actions": 25,

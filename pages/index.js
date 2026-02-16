@@ -26,7 +26,7 @@ export default function Home() {
             <Step n="4" text="Stripe product + checkout by ATLAS" />
             <Step n="5" text="Customer email sent by ATLAS" />
           </div>
-          <a href="/api/checkout" style={styles.cta}>
+          <a href="/api/checkout" className="cta">
             Buy Atlas Pro — $29/mo
           </a>
           <a
@@ -39,6 +39,23 @@ export default function Home() {
           </a>
         </div>
       </main>
+      <style jsx>{`
+        .cta {
+          display: inline-block;
+          background: linear-gradient(135deg, #7b61ff, #00d4ff);
+          color: #fff;
+          font-weight: 600;
+          padding: 0.9rem 1.8rem;
+          border-radius: 12px;
+          text-decoration: none;
+          margin-bottom: 1.5rem;
+          transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .cta:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(123, 97, 255, 0.4);
+        }
+      `}</style>
     </>
   );
 }
@@ -138,16 +155,5 @@ const styles = {
     textDecoration: "none",
     fontSize: "0.85rem",
     opacity: 0.8,
-  },
-  cta: {
-    display: "inline-block",
-    background: "linear-gradient(135deg, #7b61ff, #00d4ff)",
-    color: "#fff",
-    fontWeight: 600,
-    padding: "0.9rem 1.8rem",
-    borderRadius: "12px",
-    textDecoration: "none",
-    marginBottom: "1.5rem",
-    transition: "transform 0.2s, box-shadow 0.2s",
   },
 };

@@ -3,3 +3,8 @@ node_modules/
 out/
 .env*.local
 .env
+
+# Generated demo artifacts (run create-stripe-product.sh to generate)
+.atlas_demo_price_id
+.atlas_live_url
+.atlas_email_sent
