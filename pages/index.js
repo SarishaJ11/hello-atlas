@@ -23,8 +23,12 @@ export default function Home() {
             <Step n="1" text="Code written in Cursor" />
             <Step n="2" text="Pushed to GitHub by ATLAS" />
             <Step n="3" text="Deployed to Vercel by ATLAS" />
-            <Step n="4" text="Verified live by ATLAS" />
+            <Step n="4" text="Stripe product + checkout by ATLAS" />
+            <Step n="5" text="Customer email sent by ATLAS" />
           </div>
+          <a href="/api/checkout" style={styles.cta}>
+            Buy Atlas Pro — $29/mo
+          </a>
           <a
             href="https://github.com/sarishajaitly"
             target="_blank"
@@ -134,5 +138,16 @@ const styles = {
     textDecoration: "none",
     fontSize: "0.85rem",
     opacity: 0.8,
+  },
+  cta: {
+    display: "inline-block",
+    background: "linear-gradient(135deg, #7b61ff, #00d4ff)",
+    color: "#fff",
+    fontWeight: 600,
+    padding: "0.9rem 1.8rem",
+    borderRadius: "12px",
+    textDecoration: "none",
+    marginBottom: "1.5rem",
+    transition: "transform 0.2s, box-shadow 0.2s",
   },
 };
