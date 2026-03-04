@@ -6,14 +6,14 @@
       "id": 1,
       "name": "Initialize Git and push to GitHub",
       "type": "run_command",
-      "command": "git init && git add -A && git commit -m 'hello-atlas: shipped by ATLAS' --allow-empty && (gh repo create hello-atlas --private --source=. --push 2>/dev/null || (url=$(gh repo view hello-atlas --json url -q .url) && (git remote add origin \"$url\" 2>/dev/null || git remote set-url origin \"$url\") && (git push -u origin main || ([ "$ALLOW_FORCE_PUSH" = true ] && git push -u origin main --force)))",
+      "command": "git init && git add -A && git commit -m 'hello-orion: shipped by Orion' --allow-empty && (gh repo create hello-orion --private --source=. --push 2>/dev/null || (url=$(gh repo view hello-orion --json url -q .url) && (git remote add origin \"$url\" 2>/dev/null || git remote set-url origin \"$url\") && (git push -u origin main || ([ \"$ALLOW_FORCE_PUSH\" = true ] && git push -u origin main --force)))",
       "shell": true,
       "goal": "Initialize git repo and push to GitHub",
       "timeout": 90
     },
     {
       "id": 2,
-      "name": "Create Stripe product Atlas Pro $29/mo",
+      "name": "Create Stripe product Orion Pro $29/mo",
       "type": "run_command",
       "command": "bash scripts/create-stripe-product.sh",
       "shell": true,
@@ -24,7 +24,7 @@
       "id": 3,
       "name": "Deploy to Vercel",
       "type": "llm_navigate",
-      "goal": "Go to https://vercel.com/new. You should already be logged in. IMPORTANT: Import the repository 'hello-atlas' from YOUR GitHub account \u2014 do NOT click on vercel/examples or any other repo. Use the search box to type 'hello-atlas' if needed, and select the repo that belongs to you. On the project configuration page: keep the project name as 'hello-atlas', verify the framework is detected as Next.js, leave all other settings as default. Click the 'Deploy' button. Then WAIT on the deployment page \u2014 watch the build logs until you see a success message like 'Congratulations' or a production URL. Do NOT click away while the build is running. Once the deployment succeeds, note the production URL. Stop when deployment succeeded and the production URL is visible.",
+      "goal": "Go to https://vercel.com/new. You should already be logged in. IMPORTANT: Import the repository 'hello-orion' from YOUR GitHub account \u2014 do NOT click on vercel/examples or any other repo. Use the search box to type 'hello-orion' if needed, and select the repo that belongs to you. On the project configuration page: keep the project name as 'hello-orion', verify the framework is detected as Next.js, leave all other settings as default. Click the 'Deploy' button. Then WAIT on the deployment page \u2014 watch the build logs until you see a success message like 'Congratulations' or a production URL. Do NOT click away while the build is running. Once the deployment succeeds, note the production URL. Stop when deployment succeeded and the production URL is visible.",
       "url": "https://vercel.com/new",
       "max_actions": 40,
       "timeout": 300
@@ -61,7 +61,7 @@
       "name": "Verify live site and checkout",
       "type": "llm_navigate",
       "continue_on_failure": false,
-      "goal": "You will start on the live site. Confirm the page renders with 'ATLAS shipped this' and a 'Buy Atlas Pro' button. Click the 'Buy Atlas Pro' button. You should be redirected to Stripe Checkout. If you see the Stripe payment form, stop. The checkout flow works.",
+      "goal": "You will start on the live site. Confirm the page renders with 'Orion shipped this' and a 'Buy Orion Pro' button. Click the 'Buy Orion Pro' button. You should be redirected to Stripe Checkout. If you see the Stripe payment form, stop. The checkout flow works.",
       "url": "https://vercel.com/dashboard",
       "max_actions": 25,
       "timeout": 120

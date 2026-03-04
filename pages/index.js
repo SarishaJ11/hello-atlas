@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Hello from ATLAS</title>
+        <title>Hello from Orion</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <main style={styles.main}>
@@ -12,7 +12,7 @@ export default function Home() {
           <div style={styles.logoRow}>
             <span style={styles.globe}>&#127760;</span>
             <h1 style={styles.heading}>
-              <span style={styles.gradient}>ATLAS</span> shipped this.
+              <span style={styles.gradient}>Orion</span> shipped this.
             </h1>
           </div>
           <p style={styles.sub}>
@@ -21,41 +21,20 @@ export default function Home() {
           </p>
           <div style={styles.steps}>
             <Step n="1" text="Code written in Cursor" />
-            <Step n="2" text="Pushed to GitHub by ATLAS" />
-            <Step n="3" text="Deployed to Vercel by ATLAS" />
-            <Step n="4" text="Stripe product + checkout by ATLAS" />
-            <Step n="5" text="Customer email sent by ATLAS" />
+            <Step n="2" text="Pushed to GitHub by Orion" />
+            <Step n="3" text="Deployed to Vercel by Orion" />
+            <Step n="4" text="Verified live by Orion" />
           </div>
-          <a href="/api/checkout" className="cta">
-            Buy Atlas Pro — $29/mo
-          </a>
           <a
             href="https://github.com/sarishajaitly"
             target="_blank"
             rel="noopener noreferrer"
             style={styles.link}
           >
-            Built with ATLAS &mdash; Autonomous Task &amp; Launch Automation System
+            Built with Orion
           </a>
         </div>
       </main>
-      <style jsx>{`
-        .cta {
-          display: inline-block;
-          background: linear-gradient(135deg, #7b61ff, #00d4ff);
-          color: #fff;
-          font-weight: 600;
-          padding: 0.9rem 1.8rem;
-          border-radius: 12px;
-          text-decoration: none;
-          margin-bottom: 1.5rem;
-          transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .cta:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 20px rgba(123, 97, 255, 0.4);
-        }
-      `}</style>
     </>
   );
 }

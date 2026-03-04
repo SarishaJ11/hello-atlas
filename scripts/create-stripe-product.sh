@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Creates Stripe product "Atlas Pro" $29/mo and outputs price ID to .atlas_demo_price_id
+# Creates Stripe product "Orion Pro" $29/mo and outputs price ID to .atlas_demo_price_id
 set -e
 cd "$(dirname "$0")/.."
 # Load .env (vars may also be inherited from atlas). Use quoted values in .env for paths with spaces.
@@ -18,8 +18,8 @@ fi
 
 PRODUCT=$(curl -s -X POST https://api.stripe.com/v1/products \
   -u "$STRIPE_SECRET_KEY:" \
-  -d "name=Atlas Pro" \
-  -d "description=Atlas Pro - Monthly subscription")
+  -d "name=Orion Pro" \
+  -d "description=Orion Pro - Monthly subscription")
 
 PROD_ID=$(echo "$PRODUCT" | jq -r '.id // empty')
 if [ -z "$PROD_ID" ]; then
@@ -39,4 +39,4 @@ if [ -z "$PRICE_ID" ]; then
   exit 1
 fi
 echo "$PRICE_ID" > .atlas_demo_price_id
-echo "Created Atlas Pro - price ID: $PRICE_ID"
+echo "Created Orion Pro - price ID: $PRICE_ID"

@@ -1,10 +1,6 @@
-node_modules/
-.next/
-out/
-.env*.local
+node_modules
+.next
 .env
-
-# Generated demo artifacts (run create-stripe-product.sh to generate)
-.atlas_demo_price_id
-.atlas_live_url
-.atlas_email_sent
+.atlas_*
+!.env.example
+!.atlas_demo_price_id.example

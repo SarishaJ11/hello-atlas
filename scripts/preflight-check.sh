@@ -14,7 +14,7 @@ MISSING=()
 [ -z "$CUSTOMER_EMAIL" ] && MISSING+=("CUSTOMER_EMAIL - recipient for onboarding emails")
 
 if [ ${#MISSING[@]} -gt 0 ]; then
-  echo "Pre-flight FAILED. Add these to demo/hello-atlas/.env:" >&2
+  echo "Pre-flight FAILED. Add these to demo/hello-orion/.env:" >&2
   for m in "${MISSING[@]}"; do echo "  - $m" >&2; done
   echo "" >&2
   echo "See .env.example for the full template." >&2

@@ -11,7 +11,7 @@ FROM_EMAIL="${FROM_EMAIL:-onboarding@resend.dev}"
 if [ -f .atlas_live_url ]; then
   LIVE_URL=$(cat .atlas_live_url)
 else
-  LIVE_URL="${1:-https://hello-atlas.vercel.app}"
+  LIVE_URL="${1:-https://hello-orion.vercel.app}"
 fi
 
 # Skip if we already sent for this URL (prevents duplicates from retries/multiple runs)
@@ -23,8 +23,8 @@ if [ -f .atlas_email_sent ]; then
   fi
 fi
 
-SUBJECT="Your Atlas Pro is live"
-BODY="Your app is live at: $LIVE_URL. Log in and start building. - ATLAS"
+SUBJECT="Your Orion Pro is live"
+BODY="Your app is live at: $LIVE_URL. Log in and start building. - Orion"
 # Escape for JSON
 BODY_ESC=$(echo "$BODY" | sed 's/\\/\\\\/g; s/"/\\"/g; s/\n/\\n/g')
 

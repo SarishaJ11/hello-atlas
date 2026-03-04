@@ -16,7 +16,7 @@ else
   echo ".atlas_demo_price_id not found and STRIPE_PRICE_ID not set - run create-stripe-product.sh or set STRIPE_PRICE_ID in .env" >&2
   exit 1
 fi
-PROJECT="hello-atlas"
+PROJECT="hello-orion"
 RESP_FILE=$(mktemp)
 trap 'rm -f "$RESP_FILE"' EXIT
 
